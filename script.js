@@ -914,94 +914,54 @@ function detectRequestedProduct(message) {
 
     const productKeywords = [
 
-        /* HEADPHONES - MUST COME BEFORE PHONE */
+        {
+            keywords: ["iphone", "iphone 15"],
+            productName: "iPhone 15"
+        },
+
+        {
+            keywords: ["samsung", "galaxy a15", "a15"],
+            productName: "Samsung Galaxy A15"
+        },
+
+        {
+            keywords: ["oneplus", "nord ce"],
+            productName: "OnePlus Nord CE"
+        },
+
+        {
+            keywords: ["realme", "narzo"],
+            productName: "Realme Narzo"
+        },
+
+        {
+            keywords: ["tablet", "android tablet"],
+            productName: "Android Tablet"
+        },
+
+        {
+            keywords: ["smart watch", "smartwatch"],
+            productName: "Smart Watch"
+        },
+
         {
             keywords: [
                 "headphone",
                 "headphones",
                 "wireless headphone",
-                "wireless headphones",
-                "audio"
+                "wireless headphones"
             ],
             productName: "Wireless Headphones"
         },
 
-        /* IPHONE */
-        {
-            keywords: ["iphone"],
-            productName: "iPhone 15"
-        },
-
-        /* MOBILE */
         {
             keywords: [
-                "mobile",
-                "phone",
-                "smartphone"
+                "bluetooth speaker",
+                "speaker"
             ],
-            productName: "Samsung Galaxy A15"
+            productName: "Bluetooth Speaker"
         },
 
-        /* TABLET */
-        {
-            keywords: ["tablet"],
-            productName: "Android Tablet"
-        },
-
-        /* SHOES */
-        {
-            keywords: [
-                "shoe",
-                "shoes",
-                "sneaker",
-                "sneakers"
-            ],
-            productName: "Classic Sneakers"
-        },
-
-        /* WATCH */
-        {
-            keywords: [
-                "watch",
-                "smartwatch"
-            ],
-            productName: "Smart Watch"
-        },
-
-        /* HOODIE */
-        {
-            keywords: [
-                "hoodie",
-                "sweatshirt"
-            ],
-            productName: "Oversized Hoodie"
-        },
-
-        /* BACKPACK */
-        {
-            keywords: [
-                "backpack",
-                "college bag"
-            ],
-            productName: "Urban Backpack"
-        },
-
-        /* SUNGLASSES */
-        {
-            keywords: [
-                "sunglass",
-                "sunglasses"
-            ],
-            productName: "Premium Sunglasses"
-        },
-
-        /* KEYBOARD */
-        {
-            keywords: ["keyboard"],
-            productName: "Mechanical Keyboard"
-        },
-
-        /* GAMING MOUSE */
         {
             keywords: [
                 "gaming mouse",
@@ -1010,25 +970,24 @@ function detectRequestedProduct(message) {
             productName: "Gaming Mouse"
         },
 
-        /* LAMP */
         {
             keywords: [
-                "lamp",
-                "desk light"
+                "mechanical keyboard",
+                "keyboard"
             ],
-            productName: "Smart Desk Lamp"
+            productName: "Mechanical Keyboard"
         },
 
-        /* SPEAKER */
         {
             keywords: [
-                "speaker",
-                "bluetooth speaker"
+                "fast charging adapter",
+                "charging adapter",
+                "charger",
+                "adapter"
             ],
-            productName: "Bluetooth Speaker"
+            productName: "Fast Charging Adapter"
         },
 
-        /* POWER BANK */
         {
             keywords: [
                 "power bank",
@@ -1037,17 +996,120 @@ function detectRequestedProduct(message) {
             productName: "Power Bank"
         },
 
-        /* USB CABLE */
         {
             keywords: [
-                "usb cable",
                 "usb-c cable",
+                "usb c cable",
+                "usb cable",
                 "charging cable"
             ],
             productName: "USB-C Cable"
         },
 
-        /* LED STRIP LIGHTS */
+        {
+            keywords: [
+                "classic sneakers",
+                "sneakers"
+            ],
+            productName: "Classic Sneakers"
+        },
+
+        {
+            keywords: [
+                "running shoes",
+                "running shoe"
+            ],
+            productName: "Running Shoes"
+        },
+
+        {
+            keywords: [
+                "oversized hoodie",
+                "hoodie"
+            ],
+            productName: "Oversized Hoodie"
+        },
+
+        {
+            keywords: [
+                "casual t-shirt",
+                "casual tshirt",
+                "t-shirt",
+                "tshirt"
+            ],
+            productName: "Casual T-Shirt"
+        },
+
+        {
+            keywords: [
+                "denim jacket"
+            ],
+            productName: "Denim Jacket"
+        },
+
+        {
+            keywords: [
+                "slim fit jeans",
+                "jeans"
+            ],
+            productName: "Slim Fit Jeans"
+        },
+
+        {
+            keywords: [
+                "urban backpack",
+                "backpack",
+                "college bag"
+            ],
+            productName: "Urban Backpack"
+        },
+
+        {
+            keywords: [
+                "premium sunglasses",
+                "sunglasses",
+                "sunglass"
+            ],
+            productName: "Premium Sunglasses"
+        },
+
+        {
+            keywords: [
+                "leather wallet",
+                "wallet"
+            ],
+            productName: "Leather Wallet"
+        },
+
+        {
+            keywords: [
+                "smart desk lamp",
+                "desk lamp",
+                "desk light",
+                "lamp"
+            ],
+            productName: "Smart Desk Lamp"
+        },
+
+        {
+            keywords: [
+                "water bottle",
+                "bottle"
+            ],
+            productName: "Water Bottle"
+        },
+
+        {
+            keywords: [
+                "study table organizer",
+                "table organizer",
+                "desk organizer",
+                "study organizer",
+                "organizer"
+            ],
+            productName: "Study Table Organizer"
+        },
+
         {
             keywords: [
                 "led strip lights",
@@ -1057,6 +1119,16 @@ function detectRequestedProduct(message) {
                 "led"
             ],
             productName: "LED Strip Lights"
+        },
+
+        /* MOBILE - KEEP THIS LAST */
+        {
+            keywords: [
+                "mobile",
+                "phone",
+                "smartphone"
+            ],
+            productName: "Samsung Galaxy A15"
         }
     ];
 
