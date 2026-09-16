@@ -270,6 +270,34 @@ let currentUser = null;
 
 
 /* =========================
+   CART PERSISTENCE
+========================= */
+
+function saveCart() {
+    localStorage.setItem(
+        "shopSmartCart",
+        JSON.stringify(cart)
+    );
+}
+
+
+function loadCart() {
+    const savedCart =
+        localStorage.getItem("shopSmartCart");
+
+    if (savedCart) {
+        try {
+            cart = JSON.parse(savedCart);
+        } catch (error) {
+            cart = [];
+        }
+    } else {
+        cart = [];
+    }
+}
+
+
+/* =========================
    PRODUCT IMAGES
 ========================= */
 
@@ -402,6 +430,7 @@ function addToCart(productIndex) {
 
     cart.push(product);
     updateCartCount();
+    saveCart();
 
     alert(`${product.name} added to your cart!`);
 }
@@ -484,6 +513,7 @@ function removeFromCart(cartIndex) {
 
     updateCartCount();
     renderCart();
+    saveCart();
 }
 
 
@@ -497,6 +527,12 @@ function checkout() {
         "Thank you for shopping with ShopSmartAI! " +
         "This is a demo checkout for your college project."
     );
+
+    cart = [];
+    updateCartCount();
+    renderCart();
+    saveCart();
+    closeCart();
 }
 
 
@@ -1453,6 +1489,7 @@ document.addEventListener(
 
         loadProductsFromBackend();
 
+        loadCart();
         updateCartCount();
 
         loadTheme();
