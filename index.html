@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSmartAI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🛒 ShopSmartAI
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#offers">Offers</a>
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="theme-btn" onclick="toggleTheme()">
+                🌙
+            </button>
+
+            <button class="login-btn" onclick="openLogin()">
+                👤 Login
+            </button>
+
+            <button class="cart-btn" onclick="openCart()">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <h1>Welcome to ShopSmartAI</h1>
+
+            <p>
+                Find smart products at affordable prices.
+                Shop easily with our AI-powered shopping experience.
+            </p>
+
+            <a href="#products" class="hero-btn">
+                Shop Now
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS SECTION ================= -->
+
+    <section id="products" class="products-section">
+
+        <h2>Our Products</h2>
+
+
+        <!-- SEARCH AND FILTER -->
+
+        <section class="product-tools">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                oninput="filterProducts()"
+            >
+
+            <select
+                id="categoryFilter"
+                onchange="filterProducts()"
+            >
+
+                <option value="all">All Categories</option>
+                <option value="mobile">Mobiles</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="accessories">Accessories</option>
+                <option value="home">Home</option>
+
+            </select>
+
+        </section>
+
+
+        <!-- PRODUCTS WILL APPEAR HERE -->
+
+        <div id="productList" class="product-list">
+
+            <p>Loading products...</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= OFFERS SECTION ================= -->
+
+    <section id="offers" class="offers-section">
+
+        <h2>Special Offers</h2>
+
+        <p>
+            Click the button to unlock your special offer.
+        </p>
+
+        <button onclick="showOffer()">
+            View Offer
+        </button>
+
+        <p id="offerMessage"></p>
+
+    </section>
+
+
+    <!-- ================= CART MODAL ================= -->
+
+    <div id="cartModal" class="modal">
+
+        <div class="modal-content">
+
+            <button class="close-btn" onclick="closeCart()">
+                ✖
+            </button>
+
+            <h2>Your Shopping Cart</h2>
+
+            <div id="cartItems">
+
+                <p>Your cart is empty.</p>
+
+            </div>
+
+            <h3 id="cartTotal">
+                Total: ₹0
+            </h3>
+
+            <button onclick="checkout()">
+                Checkout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= LOGIN MODAL ================= -->
+
+    <div id="loginModal" class="modal">
+
+    <div class="modal-content auth-modal">
+
+        <button class="close-btn" onclick="closeLogin()">
+            ✖
+        </button>
+
+        <h2 id="authTitle">
+            Login to ShopSmartAI
+        </h2>
+
+        <form onsubmit="submitAuth(event)">
+
+            <input
+                type="text"
+                id="authName"
+                placeholder="Enter your name"
+            >
+
+            <input
+                type="email"
+                id="authEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+            <input
+                type="password"
+                id="authPassword"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="auth-submit"
+            >
+                Login
+            </button>
+
+        </form>
+
+        <p id="authMessage"></p>
+
+        <p>
+            <span id="authSwitchText">
+                Don't have an account?
+            </span>
+
+            <button
+                type="button"
+                id="authSwitchButton"
+                onclick="switchAuthMode()"
+            >
+                Sign Up
+            </button>
+        </p>
+
+    </div>
+
+</div>
+
+    <!-- ================= CHATBOT BUTTON ================= -->
+
+    <button
+        class="chat-toggle"
+        onclick="toggleChat()"
+        aria-label="Open ShopSmartAI chatbot"
+    >
+        🤖
+    </button>
+
+
+    <!-- ================= CHATBOT WINDOW ================= -->
+
+    <div id="chatBox" class="ai-chatbox">
+
+        <div class="ai-chat-header">
+
+            <div class="ai-bot-profile">
+
+                <div class="ai-bot-avatar">
+                    🤖
+                </div>
+
+                <div>
+
+                    <h3>ShopSmart AI</h3>
+
+                    <span>
+                        <i></i> Online assistant
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="ai-close-btn"
+                onclick="toggleChat()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="chatMessages"
+            class="ai-chat-messages"
+        >
+
+            <div class="ai-message">
+
+                <div class="message-avatar">
+                    🤖
+                </div>
+
+                <div class="message-content">
+
+                    <strong>ShopSmart AI</strong>
+
+                    <p>
+                        Hello! 👋 I can help you find products,
+                        check prices, and choose products within your budget.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHATBOT SUGGESTIONS -->
+
+        <div class="ai-suggestions">
+
+            <button onclick="quickChat('Suggest a mobile phone')">
+                📱 Mobiles
+            </button>
+
+            <button onclick="quickChat('Suggest electronics under ₹2000')">
+                💰 Under ₹2000
+            </button>
+
+            <button onclick="quickChat('Show me accessories')">
+                ⌚ Accessories
+            </button>
+
+        </div>
+
+
+        <!-- CHAT INPUT -->
+
+        <div class="ai-chat-input-area">
+
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask ShopSmart AI..."
+                onkeydown="handleChatKey(event)"
+            >
+
+            <button
+                class="ai-send-btn"
+                onclick="sendMessage()"
+            >
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 ShopSmartAI. All rights reserved.
+        </p>
+
+        <p>
+            College Mini Project
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
