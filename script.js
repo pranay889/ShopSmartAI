@@ -1,9 +1,8 @@
-
 /* =========================
    PRODUCT DATA
 ========================= */
 
-let  products = [
+let products = [
     {
         name: "Samsung Galaxy A15",
         category: "mobile",
@@ -187,20 +186,50 @@ let  products = [
         description: "Decorative LED lights for your room or gaming setup."
     }
 ];
+
+
+/* =========================
+   PRODUCT ICON
+========================= */
+
 function getProductIcon(productName) {
     const icons = {
-        "Smartphone": "📱",
-        "Wireless Headphones": "🎧",
+        "Samsung Galaxy A15": "📱",
+        "iPhone 15": "📱",
+        "OnePlus Nord CE": "📱",
+        "Realme Narzo": "📱",
+        "Android Tablet": "📲",
         "Smart Watch": "⌚",
-        "Wireless Mouse": "🖱️",
+        "Wireless Headphones": "🎧",
+        "Bluetooth Speaker": "🔊",
+        "Gaming Mouse": "🖱️",
         "Mechanical Keyboard": "⌨️",
+        "Fast Charging Adapter": "🔌",
         "Power Bank": "🔋",
-        "Laptop": "💻",
-        "Bluetooth Speaker": "🔊"
+        "USB-C Cable": "🔗",
+        "Classic Sneakers": "👟",
+        "Running Shoes": "👟",
+        "Oversized Hoodie": "🧥",
+        "Casual T-Shirt": "👕",
+        "Denim Jacket": "🧥",
+        "Slim Fit Jeans": "👖",
+        "Urban Backpack": "🎒",
+        "Premium Sunglasses": "🕶️",
+        "Leather Wallet": "👛",
+        "Smart Desk Lamp": "💡",
+        "Water Bottle": "🧴",
+        "Study Table Organizer": "🗂️",
+        "LED Strip Lights": "✨"
     };
 
     return icons[productName] || "🛍️";
 }
+
+
+/* =========================
+   LOAD PRODUCTS FROM BACKEND
+========================= */
+
 async function loadProductsFromBackend() {
     try {
         const response = await fetch("/api/products");
@@ -225,6 +254,7 @@ async function loadProductsFromBackend() {
         });
 
         displayProducts();
+
     } catch (error) {
         console.error("Backend product loading failed:", error);
 
@@ -233,9 +263,11 @@ async function loadProductsFromBackend() {
     }
 }
 
+
 let cart = [];
 let authMode = "login";
 let currentUser = null;
+
 
 /* =========================
    PRODUCT IMAGES
@@ -296,7 +328,7 @@ function displayProducts() {
         ? categoryFilter.value.toLowerCase()
         : "all";
 
-    const filteredProducts = products.filter(product => {
+    const filteredProducts = products.filter(function (product) {
         const productName = product.name.toLowerCase();
         const productDescription = product.description.toLowerCase();
         const productCategory = product.category.toLowerCase();
@@ -322,7 +354,7 @@ function displayProducts() {
         return;
     }
 
-    productList.innerHTML = filteredProducts.map(product => {
+    productList.innerHTML = filteredProducts.map(function (product) {
         const productIndex = products.indexOf(product);
 
         return `
@@ -374,6 +406,7 @@ function addToCart(productIndex) {
     alert(`${product.name} added to your cart!`);
 }
 
+
 function updateCartCount() {
     const cartCount = document.getElementById("cartCount");
 
@@ -381,6 +414,7 @@ function updateCartCount() {
         cartCount.textContent = cart.length;
     }
 }
+
 
 function openCart() {
     const cartModal = document.getElementById("cartModal");
@@ -391,6 +425,7 @@ function openCart() {
     }
 }
 
+
 function closeCart() {
     const cartModal = document.getElementById("cartModal");
 
@@ -398,6 +433,7 @@ function closeCart() {
         cartModal.style.display = "none";
     }
 }
+
 
 function renderCart() {
     const cartItems = document.getElementById("cartItems");
@@ -438,6 +474,7 @@ function renderCart() {
         `Total: ₹${total.toLocaleString("en-IN")}`;
 }
 
+
 function removeFromCart(cartIndex) {
     if (cartIndex < 0 || cartIndex >= cart.length) {
         return;
@@ -448,6 +485,7 @@ function removeFromCart(cartIndex) {
     updateCartCount();
     renderCart();
 }
+
 
 function checkout() {
     if (cart.length === 0) {
@@ -477,6 +515,7 @@ function toggleTheme() {
         isDarkMode ? "dark" : "light"
     );
 }
+
 
 function loadTheme() {
     const savedTheme =
@@ -543,9 +582,12 @@ function updateAuthForm() {
     const authTitle = document.getElementById("authTitle");
     const authName = document.getElementById("authName");
     const authSubmit = document.querySelector(".auth-submit");
-    const authSwitchText = document.getElementById("authSwitchText");
-    const authSwitchButton = document.getElementById("authSwitchButton");
-    const authMessage = document.getElementById("authMessage");
+    const authSwitchText =
+        document.getElementById("authSwitchText");
+    const authSwitchButton =
+        document.getElementById("authSwitchButton");
+    const authMessage =
+        document.getElementById("authMessage");
 
     if (!authTitle || !authName || !authSubmit) {
         return;
@@ -560,14 +602,17 @@ function updateAuthForm() {
         authSubmit.textContent = "Login";
 
         if (authSwitchText) {
-            authSwitchText.textContent = "Don't have an account?";
+            authSwitchText.textContent =
+                "Don't have an account?";
         }
 
         if (authSwitchButton) {
             authSwitchButton.textContent = "Sign Up";
         }
+
     } else {
-        authTitle.textContent = "Create ShopSmartAI Account";
+        authTitle.textContent =
+            "Create ShopSmartAI Account";
 
         authName.style.display = "block";
         authName.required = true;
@@ -575,7 +620,8 @@ function updateAuthForm() {
         authSubmit.textContent = "Sign Up";
 
         if (authSwitchText) {
-            authSwitchText.textContent = "Already have an account?";
+            authSwitchText.textContent =
+                "Already have an account?";
         }
 
         if (authSwitchButton) {
@@ -593,22 +639,45 @@ function updateAuthForm() {
 async function submitAuth(event) {
     event.preventDefault();
 
-    const nameInput = document.getElementById("authName");
-    const emailInput = document.getElementById("authEmail");
-    const passwordInput = document.getElementById("authPassword");
-    const authMessage = document.getElementById("authMessage");
+    const nameInput =
+        document.getElementById("authName");
+
+    const emailInput =
+        document.getElementById("authEmail");
+
+    const passwordInput =
+        document.getElementById("authPassword");
+
+    const authMessage =
+        document.getElementById("authMessage");
 
     if (!emailInput || !passwordInput || !authMessage) {
         return;
     }
 
-    const name = nameInput ? nameInput.value.trim() : "";
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
+    const name =
+        nameInput ? nameInput.value.trim() : "";
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+
+    /* =========================
+       SIGNUP
+    ========================= */
 
     if (authMode === "signup") {
-        if (name === "" || email === "" || password === "") {
-            authMessage.textContent = "Please fill all fields.";
+
+        if (
+            name === "" ||
+            email === "" ||
+            password === ""
+        ) {
+            authMessage.textContent =
+                "Please fill all fields.";
             return;
         }
 
@@ -636,16 +705,25 @@ async function submitAuth(event) {
 
             const result = await response.json();
 
-            authMessage.textContent = result.message;
+            authMessage.textContent =
+                result.message;
 
-            if (response.ok && result.success) {
+            if (
+                response.ok &&
+                result.success
+            ) {
                 passwordInput.value = "";
+
                 authMode = "login";
+
                 updateAuthForm();
+
                 authMessage.textContent =
                     "Account created successfully. Please login.";
             }
+
         } catch (error) {
+
             console.error("Signup error:", error);
 
             authMessage.textContent =
@@ -655,13 +733,22 @@ async function submitAuth(event) {
         return;
     }
 
-    if (email === "" || password === "") {
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    if (
+        email === "" ||
+        password === ""
+    ) {
         authMessage.textContent =
             "Please enter email and password.";
         return;
     }
 
     try {
+
         const response = await fetch(
             "/api/login",
             {
@@ -676,14 +763,20 @@ async function submitAuth(event) {
             }
         );
 
-        const result = await response.json();
+        const result =
+            await response.json();
 
-        if (response.ok && result.success) {
+        if (
+            response.ok &&
+            result.success
+        ) {
+
             currentUser = result.user;
+
             localStorage.setItem(
-                 "shopSmartLoggedInUser",
-                 JSON.stringify(currentUser)
-          );
+                "shopSmartLoggedInUser",
+                JSON.stringify(currentUser)
+            );
 
             authMessage.textContent =
                 `Welcome back, ${currentUser.name}!`;
@@ -693,10 +786,15 @@ async function submitAuth(event) {
             setTimeout(function () {
                 closeLogin();
             }, 1000);
+
         } else {
-            authMessage.textContent = result.message;
+
+            authMessage.textContent =
+                result.message;
         }
+
     } catch (error) {
+
         console.error("Login error:", error);
 
         authMessage.textContent =
@@ -705,29 +803,46 @@ async function submitAuth(event) {
 }
 
 
-// Update Login button
+/* =========================
+   UPDATE LOGIN BUTTON
+========================= */
+
 function updateLoginButton() {
-    const loginButton = document.querySelector(".login-btn");
+    const loginButton =
+        document.querySelector(".login-btn");
 
     if (!loginButton) {
         return;
     }
 
     if (currentUser) {
-        loginButton.textContent = `👋 ${currentUser.name}`;
-        loginButton.onclick = logoutUser;
+
+        loginButton.textContent =
+            `👋 ${currentUser.name}`;
+
+        loginButton.onclick =
+            logoutUser;
+
     } else {
-        loginButton.textContent = "👤 Login";
-        loginButton.onclick = openLogin;
+
+        loginButton.textContent =
+            "👤 Login";
+
+        loginButton.onclick =
+            openLogin;
     }
 }
+
+
 function loadLoggedInUser() {
-    const savedUser = localStorage.getItem(
-        "shopSmartLoggedInUser"
-    );
+    const savedUser =
+        localStorage.getItem(
+            "shopSmartLoggedInUser"
+        );
 
     if (savedUser) {
-        currentUser = JSON.parse(savedUser);
+        currentUser =
+            JSON.parse(savedUser);
     } else {
         currentUser = null;
     }
@@ -739,17 +854,24 @@ function loadLoggedInUser() {
 // Logout user
 function logoutUser() {
     currentUser = null;
+
+    localStorage.removeItem(
+        "shopSmartLoggedInUser"
+    );
+
     updateLoginButton();
 
     alert("You have been logged out.");
 }
+
 
 /* =========================
    CHATBOT
 ========================= */
 
 function toggleChat() {
-    const chatBox = document.getElementById("chatBox");
+    const chatBox =
+        document.getElementById("chatBox");
 
     if (!chatBox) {
         return;
@@ -763,6 +885,7 @@ function toggleChat() {
         isOpen ? "none" : "flex";
 }
 
+
 function quickChat(message) {
     const chatInput =
         document.getElementById("chatInput");
@@ -773,72 +896,175 @@ function quickChat(message) {
     }
 }
 
+
 function handleChatKey(event) {
     if (event.key === "Enter") {
         sendMessage();
     }
 }
 
+
+/* =========================
+   DETECT REQUESTED PRODUCT
+========================= */
+
 function detectRequestedProduct(message) {
-    const text = message.toLowerCase();
+
+    const text = message.toLowerCase().trim();
 
     const productKeywords = [
+
+        /* HEADPHONES - MUST COME BEFORE PHONE */
+        {
+            keywords: [
+                "headphone",
+                "headphones",
+                "wireless headphone",
+                "wireless headphones",
+                "audio"
+            ],
+            productName: "Wireless Headphones"
+        },
+
+        /* IPHONE */
         {
             keywords: ["iphone"],
             productName: "iPhone 15"
         },
+
+        /* MOBILE */
         {
-            keywords: ["mobile", "phone", "smartphone"],
+            keywords: [
+                "mobile",
+                "phone",
+                "smartphone"
+            ],
             productName: "Samsung Galaxy A15"
         },
+
+        /* TABLET */
         {
             keywords: ["tablet"],
             productName: "Android Tablet"
         },
+
+        /* SHOES */
         {
-            keywords: ["shoe", "shoes", "sneaker", "sneakers"],
+            keywords: [
+                "shoe",
+                "shoes",
+                "sneaker",
+                "sneakers"
+            ],
             productName: "Classic Sneakers"
         },
+
+        /* WATCH */
         {
-            keywords: ["headphone", "headphones", "audio"],
-            productName: "Wireless Headphones"
-        },
-        {
-            keywords: ["watch", "smartwatch"],
+            keywords: [
+                "watch",
+                "smartwatch"
+            ],
             productName: "Smart Watch"
         },
+
+        /* HOODIE */
         {
-            keywords: ["hoodie", "sweatshirt"],
+            keywords: [
+                "hoodie",
+                "sweatshirt"
+            ],
             productName: "Oversized Hoodie"
         },
+
+        /* BACKPACK */
         {
-            keywords: ["backpack", "college bag"],
+            keywords: [
+                "backpack",
+                "college bag"
+            ],
             productName: "Urban Backpack"
         },
+
+        /* SUNGLASSES */
         {
-            keywords: ["sunglass", "sunglasses"],
+            keywords: [
+                "sunglass",
+                "sunglasses"
+            ],
             productName: "Premium Sunglasses"
         },
+
+        /* KEYBOARD */
         {
             keywords: ["keyboard"],
             productName: "Mechanical Keyboard"
         },
+
+        /* GAMING MOUSE */
         {
-            keywords: ["lamp", "desk light"],
+            keywords: [
+                "gaming mouse",
+                "mouse"
+            ],
+            productName: "Gaming Mouse"
+        },
+
+        /* LAMP */
+        {
+            keywords: [
+                "lamp",
+                "desk light"
+            ],
             productName: "Smart Desk Lamp"
         },
+
+        /* SPEAKER */
         {
-            keywords: ["speaker"],
+            keywords: [
+                "speaker",
+                "bluetooth speaker"
+            ],
             productName: "Bluetooth Speaker"
         },
+
+        /* POWER BANK */
         {
-            keywords: ["power bank"],
+            keywords: [
+                "power bank",
+                "powerbank"
+            ],
             productName: "Power Bank"
+        },
+
+        /* USB CABLE */
+        {
+            keywords: [
+                "usb cable",
+                "usb-c cable",
+                "charging cable"
+            ],
+            productName: "USB-C Cable"
+        },
+
+        /* LED STRIP LIGHTS */
+        {
+            keywords: [
+                "led strip lights",
+                "led strip",
+                "strip lights",
+                "strip light",
+                "led"
+            ],
+            productName: "LED Strip Lights"
         }
     ];
 
+
     for (const item of productKeywords) {
+
         for (const keyword of item.keywords) {
+
             if (text.includes(keyword)) {
                 return item.productName;
             }
@@ -848,8 +1074,15 @@ function detectRequestedProduct(message) {
     return "";
 }
 
+/* =========================
+   DETECT CATEGORY
+========================= */
+
 function detectCategory(message) {
-    const text = message.toLowerCase();
+
+    const text =
+        message.toLowerCase();
+
 
     if (
         text.includes("mobile") ||
@@ -859,6 +1092,7 @@ function detectCategory(message) {
     ) {
         return "mobile";
     }
+
 
     if (
         text.includes("electronic") ||
@@ -870,6 +1104,7 @@ function detectCategory(message) {
     ) {
         return "electronics";
     }
+
 
     if (
         text.includes("fashion") ||
@@ -883,6 +1118,7 @@ function detectCategory(message) {
         return "fashion";
     }
 
+
     if (
         text.includes("accessor") ||
         text.includes("college bag") ||
@@ -893,19 +1129,29 @@ function detectCategory(message) {
         return "accessories";
     }
 
+
     if (
         text.includes("home") ||
         text.includes("lamp") ||
         text.includes("bottle") ||
-        text.includes("room")
+        text.includes("room") ||
+        text.includes("led") ||
+        text.includes("strip light")
     ) {
         return "home";
     }
 
+
     return "";
 }
 
+
+/* =========================
+   DETECT BUDGET
+========================= */
+
 function detectBudget(message) {
+
     const budgetMatch =
         message.match(/₹?\s?(\d{3,6})/);
 
@@ -916,8 +1162,18 @@ function detectBudget(message) {
     return 0;
 }
 
+
+/* =========================
+   GET RECOMMENDATION
+========================= */
+
 function getRecommendation(message) {
-    const text = message.toLowerCase();
+
+    const text =
+        message.toLowerCase();
+
+
+    /* GREETING */
 
     if (
         text === "hi" ||
@@ -928,12 +1184,18 @@ function getRecommendation(message) {
         return "Hello! 👋 Tell me what product you need and your budget.";
     }
 
+
+    /* OFFER */
+
     if (
         text.includes("offer") ||
         text.includes("discount")
     ) {
         return "🎁 Visit the Offers section to view our special discount.";
     }
+
+
+    /* CART */
 
     if (
         text.includes("cart") ||
@@ -942,111 +1204,170 @@ function getRecommendation(message) {
         return "🛒 You can open your cart to see your selected products.";
     }
 
+
+    /* CHEAPEST PRODUCT */
+
     if (
         text.includes("cheapest") ||
         text.includes("cheap product")
     ) {
-        const cheapest = [...products].sort(function (a, b) {
-            return a.price - b.price;
-        })[0];
+
+        const cheapest =
+            [...products].sort(function (a, b) {
+                return a.price - b.price;
+            })[0];
 
         return `The cheapest product is ${cheapest.name} for ₹${cheapest.price.toLocaleString("en-IN")}.`;
     }
 
+
     const requestedProductName =
         detectRequestedProduct(message);
+
 
     const selectedCategory =
         detectCategory(message);
 
+
     const userBudget =
         detectBudget(message);
 
+
+    /* EXACT PRODUCT RECOMMENDATION */
+
     if (requestedProductName) {
-        const exactProduct = products.find(function (product) {
-            return product.name === requestedProductName;
-        });
+
+        const exactProduct =
+            products.find(function (product) {
+                return product.name === requestedProductName;
+            });
+
 
         if (exactProduct) {
+
             if (
                 userBudget > 0 &&
                 exactProduct.price > userBudget
             ) {
+
                 return `${exactProduct.name} costs ₹${exactProduct.price.toLocaleString("en-IN")}, which is above your budget of ₹${userBudget.toLocaleString("en-IN")}.`;
             }
+
 
             return `🤖 I recommend ${exactProduct.name} for ₹${exactProduct.price.toLocaleString("en-IN")}.`;
         }
     }
 
-    let recommendations = products.filter(function (product) {
-        const matchesCategory =
-            selectedCategory === "" ||
-            product.category === selectedCategory;
 
-        const matchesBudget =
-            userBudget === 0 ||
-            product.price <= userBudget;
+    /* CATEGORY + BUDGET RECOMMENDATION */
 
-        return matchesCategory && matchesBudget;
-    });
+    let recommendations =
+        products.filter(function (product) {
+
+            const matchesCategory =
+                selectedCategory === "" ||
+                product.category === selectedCategory;
+
+            const matchesBudget =
+                userBudget === 0 ||
+                product.price <= userBudget;
+
+            return matchesCategory &&
+                matchesBudget;
+        });
+
 
     recommendations.sort(function (a, b) {
         return a.price - b.price;
     });
 
+
     if (recommendations.length > 0) {
-        const bestProduct = recommendations[0];
+
+        const bestProduct =
+            recommendations[0];
 
         return `🤖 I recommend ${bestProduct.name} for ₹${bestProduct.price.toLocaleString("en-IN")}.`;
     }
 
+
     if (userBudget > 0) {
+
         return `Sorry, I could not find a product under ₹${userBudget.toLocaleString("en-IN")}.`;
     }
+
 
     return "Please tell me what you need. Example: Suggest a mobile under ₹15000.";
 }
 
+
+/* =========================
+   SEND CHAT MESSAGE
+========================= */
+
 function sendMessage() {
+
     const chatInput =
         document.getElementById("chatInput");
 
     const chatMessages =
         document.getElementById("chatMessages");
 
+
     if (!chatInput || !chatMessages) {
         return;
     }
 
+
     const message =
         chatInput.value.trim();
+
 
     if (message === "") {
         return;
     }
 
+
+    /* USER MESSAGE */
+
     const userMessage =
         document.createElement("p");
 
-    userMessage.className = "user-message";
-    userMessage.textContent = message;
+    userMessage.className =
+        "user-message";
 
-    chatMessages.appendChild(userMessage);
+    userMessage.textContent =
+        message;
+
+    chatMessages.appendChild(
+        userMessage
+    );
+
+
+    /* BOT RESPONSE */
 
     const reply =
         getRecommendation(message);
 
+
     const botMessage =
         document.createElement("p");
 
-    botMessage.className = "bot-message";
-    botMessage.textContent = reply;
+    botMessage.className =
+        "bot-message";
 
-    chatMessages.appendChild(botMessage);
+    botMessage.textContent =
+        reply;
+
+    chatMessages.appendChild(
+        botMessage
+    );
+
 
     chatInput.value = "";
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
 }
 
 
@@ -1054,9 +1375,16 @@ function sendMessage() {
    INITIALIZE WEBSITE
 ========================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-    loadProductsFromBackend();
-    updateCartCount();
-    loadTheme();
-    loadLoggedInUser();
-});
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadProductsFromBackend();
+
+        updateCartCount();
+
+        loadTheme();
+
+        loadLoggedInUser();
+    }
+);
