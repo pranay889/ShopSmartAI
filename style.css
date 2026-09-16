@@ -860,3 +860,212 @@ footer h3 {
 .ai-suggestions button:hover {
     background: #ded8ff;
 }
+
+
+/* =====================================================
+   FIXES: styles for classes actually used in index.html
+   (chatbot window, login form, checkout button, search bar)
+===================================================== */
+
+/* CHATBOT WINDOW — HTML uses "ai-chatbox", old CSS only had ".chat-box" */
+.ai-chatbox {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 25px;
+    bottom: 95px;
+    width: 330px;
+    max-height: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 1500;
+}
+
+.ai-chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    background: #6c63ff;
+}
+
+.ai-bot-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ai-bot-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 18px;
+}
+
+.ai-chat-header h3 {
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.ai-chat-header span {
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+.ai-close-btn {
+    background: transparent;
+    color: white;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.ai-chat-messages {
+    height: 260px;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f7f7ff;
+}
+
+.ai-chat-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+    background: white;
+}
+
+.ai-chat-input-area input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 13px;
+    font-size: 14px;
+}
+
+.ai-send-btn {
+    width: 55px;
+    background: #6c63ff;
+    color: white;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+.ai-send-btn:hover {
+    background: #5148df;
+}
+
+/* LOGIN / SIGNUP MODAL — inputs have no class in the HTML */
+.auth-modal input {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.auth-modal input:focus {
+    border-color: #6c63ff;
+}
+
+#authSwitchButton {
+    background: transparent;
+    color: #6c63ff;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+/* CHECKOUT BUTTON — no class in HTML, targeted by its onclick handler */
+#cartModal button[onclick="checkout()"] {
+    width: 100%;
+    padding: 13px 20px;
+    margin-top: 10px;
+    background: #6c63ff;
+    color: white;
+    font-weight: bold;
+}
+
+#cartModal button[onclick="checkout()"]:hover {
+    background: #5148df;
+}
+
+/* SEARCH + CATEGORY FILTER BAR — HTML uses "product-tools" */
+.product-tools {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.product-tools input,
+.product-tools select {
+    padding: 12px 15px;
+    border: 1px solid #d5d5e8;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+}
+
+.product-tools input {
+    width: 320px;
+}
+
+.product-tools input:focus,
+.product-tools select:focus {
+    border-color: #6655ee;
+}
+
+@media (max-width: 600px) {
+    .product-tools {
+        flex-direction: column;
+    }
+
+    .product-tools input,
+    .product-tools select {
+        width: 100%;
+    }
+}
+
+/* DARK MODE — extend to the fixed elements above */
+.dark-mode .ai-chatbox,
+.dark-mode .ai-chat-messages {
+    background: #252542;
+    color: white;
+}
+
+.dark-mode .ai-chat-input-area {
+    background: #252542;
+    border-color: #444;
+}
+
+.dark-mode .ai-chat-input-area input {
+    background: #252542;
+    color: white;
+}
+
+.dark-mode .message-content {
+    background: #36365c;
+    color: white;
+}
+
+.dark-mode .auth-modal input {
+    background: #36365c;
+    color: white;
+    border-color: #555;
+}
+
+.dark-mode .product-tools input,
+.dark-mode .product-tools select {
+    background: #36365c;
+    color: white;
+    border-color: #555;
+}
